@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Java_Generics_Basics {
     public static void main(String[] args) {
@@ -27,16 +28,17 @@ public class Java_Generics_Basics {
         Box_P2.printNumberBox(doubleBox);
 
         // -- Part 3: Library with Book_P3 and Dvd_P3 demonstration --
-        Library_P3 bookLibrary = new Library_P3(Book_P3.class);
-        bookLibrary.addItem("Java for Dummies");
-        bookLibrary.addItem("Java Programming");
+        //Library_P3<Book_P3> bookLibrary = new Library_P3<>(new Book_P3());
+        Library_P3 <Book_P3> bookLibrary = new Library_P3<>(new Book_P3());
+        bookLibrary.addItem(new Book_P3("Java for Dummies"));
+        bookLibrary.addItem(new Book_P3("Java Programming"));
         System.out.println("Books in Library:");
         System.out.print(bookLibrary.toString());
 
-        System.out.println(bookLibrary.findItemByName("mystery novel"));
+        System.out.println(bookLibrary.findItemByName("Java Programming"));
 
         
-        bookLibrary.removeItem("Java for Dummies");
+        bookLibrary.removeItem(new Book_P3("Java for Dummies"));
         System.out.println("Books after removal:");
         System.out.print(bookLibrary.toString());
     }

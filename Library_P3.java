@@ -1,56 +1,64 @@
 import java.util.ArrayList;
 
-public class Library_P3 {
+public class Library_P3 <T> {
     // instance variables
-    private ArrayList <Object> items = new ArrayList<>();   // instantiated directly here
-    private Object item; // current single item, used by constructor/setter
-
+    private ArrayList <T> items = new ArrayList<>();   // instantiated directly here
+    private T item;
     // Default constructor
-    public Library_P3(Object item) {
+    public Library_P3(T item) {
         setItems(item);       
     }
 
     // setter for items
-    public void setItems(Object item) {
+    public void setItems(T item) {
         if (item == null)
             throw new IllegalArgumentException("Items cannot be null"); 
         this.item = item;
     }
 
     // Accessor for current item name
-    public Object getItemName(Object item) {
-        return item;
-    }
+    
+    //public String getItemName(T item) {
+    //    return item == null ? null : item.toString();
+    //}
     // Method to add an item to the library
 
-    public void addItem(Object item) {
+    public void addItem(T item) {
         setItems(item);
         items.add(item);
     }
 
     // Method to remove an item from the library
-    public boolean removeItem(Object item) {
-        return items.remove(item);
-    }
+    //public void removeItem(T item) {
+    //   items.remove(item);
+    //}
 
     // Method to find an item by name
-    public String findItemByName(String item) {
+    public T findItemByName(String item) {
         if (item == null || item.isEmpty())
             throw new IllegalArgumentException("Name cannot be null"); 
         
-        String book = "";
-        for (Object it : items) {
-            if (it.toString().equals(item) || item.equalsIgnoreCase(getItemName(it).toString())) {
-                book += it.toString() + "\n";
-                return book;
+        for (T it : items) {
+            if (it.toString().equals(item)) {
+                return it;
             }
         }
-        return "Not Found";
+        return null;
     }
+
+    public void removeItem(T itemName) {
+        T itemToRemove = findItemByName(itemName.toString());
+        if (itemToRemove != null) {
+            items.remove(itemToRemove);
+        } else {
+            System.out.println("Item not found for removal: " + itemName);
+        }
+    }
+
     // toString method to list all items
     public String toString() {
         String books = "";
-        for (Object it : items) {
+        for (T it : items) {
             books += it + "\n"; 
         }
         return books;
